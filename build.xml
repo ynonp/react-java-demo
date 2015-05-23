@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="citiesstarter" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.java_ee_6-java_ee_6.classpath">
+    <pathelement location="${basedir}/lib/javax.annotation.jar"/>
+    <pathelement location="${basedir}/lib/javax.ejb.jar"/>
+    <pathelement location="${basedir}/lib/javax.jms.jar"/>
+    <pathelement location="${basedir}/lib/javax.persistence.jar"/>
+    <pathelement location="${basedir}/lib/javax.resource.jar"/>
+    <pathelement location="${basedir}/lib/javax.servlet.jar"/>
+    <pathelement location="${basedir}/lib/javax.servlet.jsp.jar"/>
+    <pathelement location="${basedir}/lib/javax.transaction.jar"/>
+  </path>
+  
+  <path id="library.javax.servlet.jsp.jstl-1.2.1.classpath">
+    <pathelement location="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
+  </path>
+  
+  <path id="library.javax.servlet.jsp.jstl-api-1.2.1.classpath">
+    <pathelement location="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module CitiesStarter -->
+  
+  <dirname property="module.citiesstarter.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.citiesstarter" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  
+  <property name="citiesstarter.output.dir" value="${module.citiesstarter.basedir}/out/production/CitiesStarter"/>
+  <property name="citiesstarter.testoutput.dir" value="${module.citiesstarter.basedir}/out/test/CitiesStarter"/>
+  
+  <path id="citiesstarter.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="citiesstarter.module.production.classpath">
+    <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+  </path>
+  
+  <path id="citiesstarter.runtime.production.module.classpath">
+    <pathelement location="${citiesstarter.output.dir}"/>
+    <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+  </path>
+  
+  <path id="citiesstarter.module.classpath">
+    <pathelement location="${citiesstarter.output.dir}"/>
+    <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+  </path>
+  
+  <path id="citiesstarter.runtime.module.classpath">
+    <pathelement location="${citiesstarter.testoutput.dir}"/>
+    <pathelement location="${citiesstarter.output.dir}"/>
+    <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
+    <path refid="library.java_ee_6-java_ee_6.classpath"/>
+    <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.citiesstarter">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.citiesstarter">
+    <patternset refid="excluded.from.module.citiesstarter"/>
+  </patternset>
+  
+  <path id="citiesstarter.module.sourcepath">
+    <dirset dir="${module.citiesstarter.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.citiesstarter" depends="compile.module.citiesstarter.production,compile.module.citiesstarter.tests" description="Compile module CitiesStarter"/>
+  
+  <target name="compile.module.citiesstarter.production" description="Compile module CitiesStarter; production classes">
+    <mkdir dir="${citiesstarter.output.dir}"/>
+    <javac destdir="${citiesstarter.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.citiesstarter}"/>
+      <bootclasspath refid="citiesstarter.module.bootclasspath"/>
+      <classpath refid="citiesstarter.module.production.classpath"/>
+      <src refid="citiesstarter.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.citiesstarter"/>
+    </javac>
+    
+    <copy todir="${citiesstarter.output.dir}">
+      <fileset dir="${module.citiesstarter.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.citiesstarter.tests" depends="compile.module.citiesstarter.production" description="compile module CitiesStarter; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.citiesstarter" description="cleanup module">
+    <delete dir="${citiesstarter.output.dir}"/>
+    <delete dir="${citiesstarter.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.citiesstarter, clean.artifact.citiesstarter:war_exploded" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.citiesstarter" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.citiesstarter:war_exploded" value="${basedir}/out/artifacts/CitiesStarter_war_exploded"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="clean.artifact.citiesstarter:war_exploded" description="clean CitiesStarter:war exploded artifact output">
+    <delete dir="${artifact.output.citiesstarter:war_exploded}"/>
+  </target>
+  
+  <target name="artifact.citiesstarter:war_exploded" depends="init.artifacts, compile.module.citiesstarter" description="Build &#39;CitiesStarter:war exploded&#39; artifact">
+    <mkdir dir="${artifact.output.citiesstarter:war_exploded}"/>
+    <copy todir="${artifact.output.citiesstarter:war_exploded}">
+      <fileset dir="${basedir}/web"/>
+    </copy>
+    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF"/>
+    <copy file="${basedir}/web/WEB-INF/web.xml" tofile="${artifact.output.citiesstarter:war_exploded}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF"/>
+    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.citiesstarter:war_exploded}/WEB-INF/classes">
+      <fileset dir="${citiesstarter.output.dir}"/>
+    </copy>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.citiesstarter:war_exploded" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
