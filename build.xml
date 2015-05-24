@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="citiesstarter" default="all">
+<project name="reactjavaexample" default="all">
   
   
   <property file="build.properties"/>
@@ -91,7 +91,7 @@
   
   
   
-  <property name="compiler.args.citiesstarter" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
+  <property name="compiler.args.citiesstarter" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
   
   <property name="citiesstarter.output.dir" value="${module.citiesstarter.basedir}/out/production/CitiesStarter"/>
   <property name="citiesstarter.testoutput.dir" value="${module.citiesstarter.basedir}/out/test/CitiesStarter"/>
@@ -175,35 +175,38 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.citiesstarter, clean.artifact.citiesstarter:war_exploded" description="cleanup all"/>
+  <target name="clean" depends="clean.module.citiesstarter, clean.artifact.cityselector-step1" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.citiesstarter" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-    <property name="artifact.output.citiesstarter:war_exploded" value="${basedir}/out/artifacts/CitiesStarter_war_exploded"/>
+    <property name="artifact.output.cityselector-step1" value="${basedir}/out/artifacts/CitySelector_step1"/>
     <mkdir dir="${artifacts.temp.dir}"/>
   </target>
   
-  <target name="clean.artifact.citiesstarter:war_exploded" description="clean CitiesStarter:war exploded artifact output">
-    <delete dir="${artifact.output.citiesstarter:war_exploded}"/>
+  <target name="clean.artifact.cityselector-step1" description="clean CitySelector-step1 artifact output">
+    <delete dir="${artifact.output.cityselector-step1}"/>
   </target>
   
-  <target name="artifact.citiesstarter:war_exploded" depends="init.artifacts, compile.module.citiesstarter" description="Build &#39;CitiesStarter:war exploded&#39; artifact">
-    <mkdir dir="${artifact.output.citiesstarter:war_exploded}"/>
-    <copy todir="${artifact.output.citiesstarter:war_exploded}">
+  <target name="artifact.cityselector-step1" depends="init.artifacts, compile.module.citiesstarter" description="Build &#39;CitySelector-step1&#39; artifact">
+    <mkdir dir="${artifact.output.cityselector-step1}"/>
+    <copy todir="${artifact.output.cityselector-step1}">
       <fileset dir="${basedir}/web"/>
     </copy>
-    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF"/>
-    <copy file="${basedir}/web/WEB-INF/web.xml" tofile="${artifact.output.citiesstarter:war_exploded}/WEB-INF/web.xml"/>
-    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF"/>
-    <mkdir dir="${artifact.output.citiesstarter:war_exploded}/WEB-INF/classes"/>
-    <copy todir="${artifact.output.citiesstarter:war_exploded}/WEB-INF/classes">
+    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF"/>
+    <copy file="${basedir}/web/WEB-INF/web.xml" tofile="${artifact.output.cityselector-step1}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF"/>
+    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.cityselector-step1}/WEB-INF/classes">
       <fileset dir="${citiesstarter.output.dir}"/>
     </copy>
+    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF/lib"/>
+    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar" tofile="${artifact.output.cityselector-step1}/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar" tofile="${artifact.output.cityselector-step1}/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
   </target>
   
-  <target name="build.all.artifacts" depends="artifact.citiesstarter:war_exploded" description="Build all artifacts">
+  <target name="build.all.artifacts" depends="artifact.cityselector-step1" description="Build all artifacts">
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
