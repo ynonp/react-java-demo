@@ -60,6 +60,12 @@
   
   <!-- Project Libraries -->
   
+  <path id="library.jackson-annotations-2.5.3.classpath">
+    <pathelement location="${basedir}/web/WEB-INF/lib/jackson-annotations-2.5.3.jar"/>
+    <pathelement location="${basedir}/web/WEB-INF/lib/jackson-core-2.5.3.jar"/>
+    <pathelement location="${basedir}/web/WEB-INF/lib/jackson-databind-2.5.3.jar"/>
+  </path>
+  
   <path id="library.java_ee_6-java_ee_6.classpath">
     <pathelement location="${basedir}/lib/javax.annotation.jar"/>
     <pathelement location="${basedir}/lib/javax.ejb.jar"/>
@@ -104,6 +110,7 @@
     <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+    <path refid="library.jackson-annotations-2.5.3.classpath"/>
   </path>
   
   <path id="citiesstarter.runtime.production.module.classpath">
@@ -111,6 +118,7 @@
     <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+    <path refid="library.jackson-annotations-2.5.3.classpath"/>
   </path>
   
   <path id="citiesstarter.module.classpath">
@@ -118,6 +126,7 @@
     <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+    <path refid="library.jackson-annotations-2.5.3.classpath"/>
   </path>
   
   <path id="citiesstarter.runtime.module.classpath">
@@ -126,6 +135,7 @@
     <path refid="library.javax.servlet.jsp.jstl-api-1.2.1.classpath"/>
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
+    <path refid="library.jackson-annotations-2.5.3.classpath"/>
   </path>
   
   
@@ -175,47 +185,47 @@
     <!-- Perform any build initialization in this target -->
   </target>
   
-  <target name="clean" depends="clean.module.citiesstarter, clean.artifact.cityselector-step1" description="cleanup all"/>
+  <target name="clean" depends="clean.module.citiesstarter, clean.artifact.cityselector-step2" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.citiesstarter" description="build all modules"/>
   
   <target name="init.artifacts">
     <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
-    <property name="artifact.output.cityselector-step1" value="${basedir}/out/artifacts/CitySelector_step1"/>
+    <property name="artifact.output.cityselector-step2" value="${basedir}/out/artifacts/CitySelector_step2"/>
     <mkdir dir="${artifacts.temp.dir}"/>
   </target>
   
-  <target name="clean.artifact.cityselector-step1" description="clean CitySelector-step1 artifact output">
-    <delete dir="${artifact.output.cityselector-step1}"/>
+  <target name="clean.artifact.cityselector-step2" description="clean CitySelector-step2 artifact output">
+    <delete dir="${artifact.output.cityselector-step2}"/>
   </target>
   
-  <target name="artifact.cityselector-step1" depends="init.artifacts, compile.module.citiesstarter" description="Build &#39;CitySelector-step1&#39; artifact">
-    <mkdir dir="${artifact.output.cityselector-step1}"/>
-    <copy todir="${artifact.output.cityselector-step1}">
+  <target name="artifact.cityselector-step2" depends="init.artifacts, compile.module.citiesstarter" description="Build &#39;CitySelector-step2&#39; artifact">
+    <mkdir dir="${artifact.output.cityselector-step2}"/>
+    <copy todir="${artifact.output.cityselector-step2}">
       <fileset dir="${basedir}/web"/>
     </copy>
-    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF"/>
-    <copy file="${basedir}/web/WEB-INF/web.xml" tofile="${artifact.output.cityselector-step1}/WEB-INF/web.xml"/>
-    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF"/>
-    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF/classes"/>
-    <copy todir="${artifact.output.cityselector-step1}/WEB-INF/classes">
+    <mkdir dir="${artifact.output.cityselector-step2}/WEB-INF"/>
+    <copy file="${basedir}/web/WEB-INF/web.xml" tofile="${artifact.output.cityselector-step2}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.cityselector-step2}/WEB-INF"/>
+    <mkdir dir="${artifact.output.cityselector-step2}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.cityselector-step2}/WEB-INF/classes">
       <fileset dir="${citiesstarter.output.dir}"/>
     </copy>
-    <mkdir dir="${artifact.output.cityselector-step1}/WEB-INF/lib"/>
-    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar" tofile="${artifact.output.cityselector-step1}/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
-    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar" tofile="${artifact.output.cityselector-step1}/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
+    <mkdir dir="${artifact.output.cityselector-step2}/WEB-INF/lib"/>
+    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar" tofile="${artifact.output.cityselector-step2}/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+    <copy file="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar" tofile="${artifact.output.cityselector-step2}/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
   </target>
   
-  <target name="build.all.artifacts" depends="artifact.cityselector-step1" description="Build all artifacts">
+  <target name="build.all.artifacts" depends="artifact.cityselector-step2" description="Build all artifacts">
     
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-
   <target name="webpack">
     <exec executable="webpack">
     </exec>
   </target>
+
 
   <target name="all" depends="webpack, build.modules, build.all.artifacts" description="build all"/>
 </project>
