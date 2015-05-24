@@ -85,6 +85,10 @@
     <pathelement location="${basedir}/web/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
   </path>
   
+  <path id="library.jreact-0.0.3.classpath">
+    <pathelement location="${basedir}/web/WEB-INF/lib/jreact-0.0.3.jar"/>
+  </path>
+  
   
   <!-- Application Server Libraries -->
   
@@ -111,6 +115,7 @@
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
     <path refid="library.jackson-annotations-2.5.3.classpath"/>
+    <path refid="library.jreact-0.0.3.classpath"/>
   </path>
   
   <path id="citiesstarter.runtime.production.module.classpath">
@@ -119,6 +124,7 @@
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
     <path refid="library.jackson-annotations-2.5.3.classpath"/>
+    <path refid="library.jreact-0.0.3.classpath"/>
   </path>
   
   <path id="citiesstarter.module.classpath">
@@ -127,6 +133,7 @@
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
     <path refid="library.jackson-annotations-2.5.3.classpath"/>
+    <path refid="library.jreact-0.0.3.classpath"/>
   </path>
   
   <path id="citiesstarter.runtime.module.classpath">
@@ -136,6 +143,7 @@
     <path refid="library.java_ee_6-java_ee_6.classpath"/>
     <path refid="library.javax.servlet.jsp.jstl-1.2.1.classpath"/>
     <path refid="library.jackson-annotations-2.5.3.classpath"/>
+    <path refid="library.jreact-0.0.3.classpath"/>
   </path>
   
   
@@ -221,11 +229,11 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
+
   <target name="webpack">
-    <exec executable="webpack">
+    <exec executable="webpack" dir="${basedir}/web/WEB-INF">
     </exec>
   </target>
 
-
-  <target name="all" depends="webpack, build.modules, build.all.artifacts" description="build all"/>
+  <target name="all" depends="webpack,build.modules, build.all.artifacts" description="build all"/>
 </project>

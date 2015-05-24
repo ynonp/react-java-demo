@@ -40,7 +40,7 @@
 <body>
 <h1>React Demo</h1>
 
-<main></main>
+<main>${react_initial_markup}</main>
 
 <script>
     window.__APP_DATA = JSON.parse('${props}');
