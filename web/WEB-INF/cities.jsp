@@ -40,29 +40,15 @@
 <body>
 <h1>React Demo</h1>
 
-<h2>Pick a city to see its picture</h2>
+<main></main>
 
-<ul>
-    <c:forEach var="city" items="${cities}">
-        <li class="cityButton" data-img="${city.getImg()}"><a><c:out value="${city.getName()}"/></a></li>
-    </c:forEach>
-</ul>
-<img id="canvas" />
 <script>
-    var img = document.querySelector('#canvas');
-    var buttons = document.querySelectorAll('.cityButton');
-    var prevActive;
-
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', function () {
-            img.src = this.dataset.img;
-            this.classList.add('active');
-            if (prevActive && prevActive !== this) {
-                prevActive.classList.remove('active');
-            }
-            prevActive = this;
-        });
-    }
+    window.__APP_DATA = JSON.parse('${props}');
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script src="/js/bundle.js"></script>
+
 </body>
 </html>

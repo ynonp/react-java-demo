@@ -211,6 +211,11 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-  
-  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+
+  <target name="webpack">
+    <exec executable="webpack">
+    </exec>
+  </target>
+
+  <target name="all" depends="webpack, build.modules, build.all.artifacts" description="build all"/>
 </project>

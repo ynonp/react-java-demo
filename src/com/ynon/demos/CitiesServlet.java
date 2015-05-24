@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Created by ynonperek on 5/24/15.
  */
@@ -20,7 +20,10 @@ public class CitiesServlet extends javax.servlet.http.HttpServlet {
         cities.add(new City("London", "http://i.telegraph.co.uk/multimedia/archive/02423/london_2423609k.jpg"));
         cities.add(new City("Berlin", "http://www.jobs-berlin.org/wp-content/uploads/2013/04/Fotolia_45852498_S.jpg"));
 
-        request.setAttribute("cities", cities);
+        Map<String, Object> props = new HashMap<>();
+        props.put("cities", cities);
+
+        request.setAttribute("props",  new ObjectMapper().writeValueAsString(props));
 
         getServletConfig().getServletContext().getRequestDispatcher(
                 "/WEB-INF/cities.jsp").forward(request,response);
